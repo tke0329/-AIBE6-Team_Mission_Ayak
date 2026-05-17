@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 import { createClient } from "@/lib/supabase/client";
 import { getKoreanSignUpErrorMessage } from "@/lib/supabase/auth-error";
+import { AyakBrandLogo } from "@/components/ayak-brand-logo";
 import { HomeIcon, PageLinkActionButton } from "@/components/page-action-button";
 
 export function JoinPage() {
@@ -55,6 +56,9 @@ export function JoinPage() {
         <div className="mb-8 text-center">
           <div className="flex justify-start">
             <PageLinkActionButton href="/" icon={<HomeIcon />} label="홈으로" />
+          </div>
+          <div className="mx-auto mt-4 flex w-fit items-center justify-center rounded-3xl bg-white/80 p-3 shadow-[0_16px_40px_rgba(0,80,203,0.12)]">
+            <AyakBrandLogo size={84} />
           </div>
           <h1 className="font-display text-3xl font-bold text-[var(--color-primary)]">AYAK 회원가입</h1>
         </div>

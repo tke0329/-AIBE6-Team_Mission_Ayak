@@ -5,6 +5,7 @@ import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { createClient } from "@/lib/supabase/client";
+import { AyakBrandLogo } from "@/components/ayak-brand-logo";
 import {
   HomeIcon,
   PageLinkActionButton,
@@ -52,8 +53,8 @@ export function LoginPage({ nextPath = "/", joined = false }: LoginPageProps) {
           <div className="flex justify-start">
             <PageLinkActionButton href="/" icon={<HomeIcon />} label="홈으로" />
           </div>
-          <div className="mx-auto flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-full bg-[var(--color-primary)] text-lg font-bold text-white shadow-[0_16px_40px_rgba(0,80,203,0.28)] md:h-20 md:w-20">
-            AY
+          <div className="mx-auto flex w-fit items-center justify-center rounded-3xl bg-white/80 p-3 shadow-[0_16px_40px_rgba(0,80,203,0.12)]">
+            <AyakBrandLogo size={84} />
           </div>
           <h1 className="font-display mt-5 text-3xl font-bold text-[var(--color-primary)]">
             AYAK 로그인
