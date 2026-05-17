@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AYAK - Search Medications</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed-variant": "#004e60",
+                        "on-tertiary-fixed-variant": "#005313",
+                        "outline": "#727687",
+                        "surface-container-high": "#dce9ff",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#70ff76",
+                        "secondary": "#00677f",
+                        "outline-variant": "#c2c6d8",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#001f28",
+                        "tertiary-fixed-dim": "#42e355",
+                        "on-primary-fixed-variant": "#003fa4",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#0050cb",
+                        "background": "#f8f9ff",
+                        "surface": "#f8f9ff",
+                        "primary-container": "#0066ff",
+                        "tertiary-container": "#008423",
+                        "on-primary-container": "#f8f7ff",
+                        "primary-fixed": "#dae1ff",
+                        "on-secondary-container": "#005266",
+                        "on-background": "#0b1c30",
+                        "secondary-fixed": "#b7eaff",
+                        "on-surface": "#0b1c30",
+                        "primary-fixed-dim": "#b3c5ff",
+                        "secondary-fixed-dim": "#4cd6ff",
+                        "on-secondary": "#ffffff",
+                        "surface-variant": "#d3e4fe",
+                        "surface-dim": "#cbdbf5",
+                        "tertiary": "#00681a",
+                        "on-tertiary-container": "#e5ffdc",
+                        "surface-container-low": "#eff4ff",
+                        "inverse-primary": "#b3c5ff",
+                        "inverse-surface": "#213145",
+                        "surface-container": "#e5eeff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#f8f9ff",
+                        "secondary-container": "#00ccf9",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed": "#002204",
+                        "surface-tint": "#0054d6",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-primary-fixed": "#001849",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#424656",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "40px",
+                        "gutter-mobile": "16px",
+                        "base": "8px",
+                        "gutter-desktop": "24px",
+                        "margin-mobile": "16px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "headline-sm": ["Manrope"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Manrope"],
+                        "headline-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "label-sm": ["10px", { "lineHeight": "14px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #F8FAFC; /* Fallback to a light floor */
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background antialiased min-h-screen flex flex-col pt-16 pb-20 md:pb-0 md:pt-24">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface-dim text-primary dark:text-primary-fixed docked full-width top-0 shadow-[0_4px_20px_rgba(0,102,255,0.05)] flex justify-between items-center h-16 px-margin-mobile w-full fixed top-0 z-50 md:hidden border-b border-outline-variant/30">
+<button class="text-primary dark:text-primary-fixed hover:bg-surface-container-high transition-colors active:scale-95 transition-transform p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<div class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed-dim">
+            AYAK
+        </div>
+<button class="hover:bg-surface-container-high transition-colors active:scale-95 transition-transform p-1 rounded-full flex items-center justify-center">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-[20px]" data-icon="person">person</span>
+</div>
+</button>
+</header>
+<!-- Desktop Top Nav Cluster (Replaces TopAppBar on Desktop) -->
+<nav class="hidden md:flex fixed top-0 left-0 w-full h-20 bg-surface z-50 px-margin-desktop items-center justify-between shadow-[0_4px_20px_rgba(0,102,255,0.05)]">
+<div class="text-headline-md font-headline-md font-bold text-primary flex items-center gap-4">
+<span class="material-symbols-outlined text-[32px]">medical_services</span>
+            AYAK
+        </div>
+<div class="flex gap-8 items-center">
+<a class="flex items-center gap-2 text-on-surface-variant hover:bg-surface-container-high px-4 py-2 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-label-lg font-label-lg">Home</span>
+</a>
+<a class="flex items-center gap-2 text-primary font-bold bg-secondary-container text-on-secondary-container px-4 py-2 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="search" style="font-variation-settings: 'FILL' 1;">search</span>
+<span class="text-label-lg font-label-lg">Search</span>
+</a>
+<a class="flex items-center gap-2 text-on-surface-variant hover:bg-surface-container-high px-4 py-2 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="medication">medication</span>
+<span class="text-label-lg font-label-lg">Meds</span>
+</a>
+<button class="ml-4 w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center overflow-hidden hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-[1280px] mx-auto px-margin-mobile md:px-margin-desktop flex flex-col gap-8 py-6">
+<!-- Search Header & Input -->
+<section class="w-full flex flex-col items-center text-center gap-6 mt-4 md:mt-8">
+<div class="flex flex-col gap-2 max-w-2xl">
+<h1 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg-mobile md:font-headline-lg text-on-surface">Find Medication Info Fast</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant">Enter a drug name or active ingredient to review clinical guidelines, interactions, and vital patient cautions.</p>
+</div>
+<div class="relative w-full max-w-2xl group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline-variant group-focus-within:text-primary transition-colors">search</span>
+</div>
+<input class="w-full pl-12 pr-4 py-4 bg-surface rounded-xl border border-outline-variant/50 shadow-sm text-body-lg font-body-lg text-on-surface placeholder:text-outline-variant focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/20 transition-all" placeholder="e.g., Amoxicillin, Lisinopril..." type="text"/>
+<button class="absolute inset-y-2 right-2 px-6 bg-primary text-on-primary rounded-lg text-label-lg font-label-lg hover:bg-surface-tint transition-colors shadow-md">
+                    Search
+                </button>
+</div>
+</section>
+<!-- Search Results Grid (Bento Style) -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+<!-- Result Card 1 -->
+<div class="bg-surface rounded-xl p-6 shadow-[0_4px_20px_rgba(0,102,255,0.05)] border border-[#E2E8F0] flex flex-col gap-4 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+<div class="flex justify-between items-start border-b border-outline-variant/30 pb-4">
+<div class="flex flex-col">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Lisinopril</h3>
+<span class="text-body-sm font-body-sm text-outline">ACE Inhibitor (10mg)</span>
+</div>
+<span class="material-symbols-outlined text-primary bg-primary-fixed/30 p-2 rounded-lg">prescriptions</span>
+</div>
+<div class="flex flex-col gap-3 flex-grow">
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-tertiary text-[20px] mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Take at the same time each day, with or without food.</p>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-error text-[20px] mt-0.5" style="font-variation-settings: 'FILL' 1;">warning</span>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Caution: May cause dry cough or dizziness upon rising.</p>
+</div>
+</div>
+<div class="mt-auto pt-4 flex gap-3">
+<button class="flex-1 bg-primary text-on-primary py-2.5 rounded-lg text-label-lg font-label-lg hover:bg-surface-tint transition-colors shadow-sm">
+                        View Details
+                    </button>
+<button class="px-3 bg-secondary-container/20 text-secondary py-2.5 rounded-lg hover:bg-secondary-container/40 transition-colors">
+<span class="material-symbols-outlined">bookmark_add</span>
+</button>
+</div>
+</div>
+<!-- Result Card 2 -->
+<div class="bg-surface rounded-xl p-6 shadow-[0_4px_20px_rgba(0,102,255,0.05)] border border-[#E2E8F0] flex flex-col gap-4 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+<div class="flex justify-between items-start border-b border-outline-variant/30 pb-4">
+<div class="flex flex-col">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Metformin</h3>
+<span class="text-body-sm font-body-sm text-outline">Biguanide (500mg)</span>
+</div>
+<span class="material-symbols-outlined text-primary bg-primary-fixed/30 p-2 rounded-lg">medication_liquid</span>
+</div>
+<div class="flex flex-col gap-3 flex-grow">
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-tertiary text-[20px] mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Take strictly with meals to reduce GI upset.</p>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-error text-[20px] mt-0.5" style="font-variation-settings: 'FILL' 1;">warning</span>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Risk of lactic acidosis in rare cases; monitor kidney function.</p>
+</div>
+</div>
+<div class="mt-auto pt-4 flex gap-3">
+<button class="flex-1 bg-primary text-on-primary py-2.5 rounded-lg text-label-lg font-label-lg hover:bg-surface-tint transition-colors shadow-sm">
+                        View Details
+                    </button>
+<button class="px-3 bg-secondary-container/20 text-secondary py-2.5 rounded-lg hover:bg-secondary-container/40 transition-colors">
+<span class="material-symbols-outlined">bookmark_add</span>
+</button>
+</div>
+</div>
+<!-- Result Card 3 -->
+<div class="bg-surface rounded-xl p-6 shadow-[0_4px_20px_rgba(0,102,255,0.05)] border border-[#E2E8F0] flex flex-col gap-4 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+<div class="flex justify-between items-start border-b border-outline-variant/30 pb-4">
+<div class="flex flex-col">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Atorvastatin</h3>
+<span class="text-body-sm font-body-sm text-outline">Statin (20mg)</span>
+</div>
+<span class="material-symbols-outlined text-primary bg-primary-fixed/30 p-2 rounded-lg">monitor_heart</span>
+</div>
+<div class="flex flex-col gap-3 flex-grow">
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-tertiary text-[20px] mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Can be taken at any time of day, with or without food.</p>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-error text-[20px] mt-0.5" style="font-variation-settings: 'FILL' 1;">warning</span>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Avoid large quantities of grapefruit juice. Report muscle pain.</p>
+</div>
+</div>
+<div class="mt-auto pt-4 flex gap-3">
+<button class="flex-1 bg-primary text-on-primary py-2.5 rounded-lg text-label-lg font-label-lg hover:bg-surface-tint transition-colors shadow-sm">
+                        View Details
+                    </button>
+<button class="px-3 bg-secondary-container/20 text-secondary py-2.5 rounded-lg hover:bg-secondary-container/40 transition-colors">
+<span class="material-symbols-outlined">bookmark_add</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden bg-surface-container-lowest dark:bg-surface-container-low text-primary dark:text-primary-fixed shadow-lg docked full-width bottom-0 rounded-t-xl fixed bottom-0 left-0 w-full h-20 z-50 flex justify-around items-center px-4 pb-safe">
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline p-2 hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-xl transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-label-md font-label-md mt-1">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-xl px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined" data-icon="search" style="font-variation-settings: 'FILL' 1;">search</span>
+<span class="text-label-md font-label-md mt-1 font-bold">Search</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline p-2 hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-xl transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined" data-icon="medication">medication</span>
+<span class="text-label-md font-label-md mt-1">Meds</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline p-2 hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-xl transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-label-md font-label-md mt-1">Profile</span>
+</button>
+</nav>
+</body></html>

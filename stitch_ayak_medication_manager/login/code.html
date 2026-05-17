@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login - AYAK</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "on-secondary-fixed-variant": "#004e60",
+                            "on-tertiary-fixed-variant": "#005313",
+                            "outline": "#727687",
+                            "surface-container-high": "#dce9ff",
+                            "on-tertiary": "#ffffff",
+                            "tertiary-fixed": "#70ff76",
+                            "secondary": "#00677f",
+                            "outline-variant": "#c2c6d8",
+                            "on-primary": "#ffffff",
+                            "on-secondary-fixed": "#001f28",
+                            "tertiary-fixed-dim": "#42e355",
+                            "on-primary-fixed-variant": "#003fa4",
+                            "surface-container-lowest": "#ffffff",
+                            "primary": "#0050cb",
+                            "background": "#f8f9ff",
+                            "surface": "#f8f9ff",
+                            "primary-container": "#0066ff",
+                            "tertiary-container": "#008423",
+                            "on-primary-container": "#f8f7ff",
+                            "primary-fixed": "#dae1ff",
+                            "on-secondary-container": "#005266",
+                            "on-background": "#0b1c30",
+                            "secondary-fixed": "#b7eaff",
+                            "on-surface": "#0b1c30",
+                            "primary-fixed-dim": "#b3c5ff",
+                            "secondary-fixed-dim": "#4cd6ff",
+                            "on-secondary": "#ffffff",
+                            "surface-variant": "#d3e4fe",
+                            "surface-dim": "#cbdbf5",
+                            "tertiary": "#00681a",
+                            "on-tertiary-container": "#e5ffdc",
+                            "surface-container-low": "#eff4ff",
+                            "inverse-primary": "#b3c5ff",
+                            "inverse-surface": "#213145",
+                            "surface-container": "#e5eeff",
+                            "inverse-on-surface": "#eaf1ff",
+                            "error-container": "#ffdad6",
+                            "surface-bright": "#f8f9ff",
+                            "secondary-container": "#00ccf9",
+                            "on-error": "#ffffff",
+                            "on-tertiary-fixed": "#002204",
+                            "surface-tint": "#0054d6",
+                            "surface-container-highest": "#d3e4fe",
+                            "on-primary-fixed": "#001849",
+                            "on-error-container": "#93000a",
+                            "on-surface-variant": "#424656",
+                            "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "0.25rem",
+                            "lg": "0.5rem",
+                            "xl": "0.75rem",
+                            "full": "9999px"
+                    },
+                    "spacing": {
+                            "margin-desktop": "40px",
+                            "gutter-mobile": "16px",
+                            "base": "8px",
+                            "gutter-desktop": "24px",
+                            "margin-mobile": "16px",
+                            "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                            "label-md": ["Inter"],
+                            "body-sm": ["Inter"],
+                            "headline-lg-mobile": ["Manrope"],
+                            "headline-sm": ["Manrope"],
+                            "body-lg": ["Inter"],
+                            "body-md": ["Inter"],
+                            "label-lg": ["Inter"],
+                            "label-sm": ["Inter"],
+                            "headline-lg": ["Manrope"],
+                            "headline-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                            "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                            "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                            "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                            "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                            "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                            "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                            "label-sm": ["10px", {"lineHeight": "14px", "fontWeight": "500"}],
+                            "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                            "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background min-h-screen flex items-center justify-center p-margin-mobile md:p-margin-desktop text-on-surface">
+<!-- Note: TopAppBar and BottomNavBar are suppressed as this is a linear/transactional login page. -->
+<main class="w-full max-w-md bg-surface-container-lowest rounded-xl shadow-[0_4px_20px_rgba(0,102,255,0.05)] border border-outline-variant/30 p-8 flex flex-col items-center">
+<!-- Brand Logo Area -->
+<div class="mb-8 flex flex-col items-center">
+<div class="w-16 h-16 bg-primary-container rounded-full flex items-center justify-center mb-4 shadow-[0_4px_20px_rgba(0,102,255,0.2)]">
+<span class="material-symbols-outlined text-on-primary-container text-4xl" data-icon="health_and_safety" style="font-variation-settings: 'FILL' 1;">health_and_safety</span>
+</div>
+<h1 class="text-headline-md font-headline-md text-primary text-center">AYAK</h1>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-2 text-center">Sign in to your account</p>
+</div>
+<!-- Login Form -->
+<form class="w-full space-y-6">
+<!-- Email Input -->
+<div class="space-y-2">
+<label class="text-label-md font-label-md text-on-surface block" for="email">Email Address</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline" data-icon="mail">mail</span>
+</div>
+<input class="w-full pl-10 pr-4 py-3 bg-background border border-outline-variant rounded-lg text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-3 focus:ring-primary/20 transition-all placeholder:text-outline/70" id="email" name="email" placeholder="name@example.com" type="email"/>
+</div>
+</div>
+<!-- Password Input -->
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<label class="text-label-md font-label-md text-on-surface block" for="password">Password</label>
+<a class="text-label-sm font-label-sm text-primary hover:text-primary-container transition-colors" href="#">Forgot password?</a>
+</div>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline" data-icon="lock">lock</span>
+</div>
+<input class="w-full pl-10 pr-10 py-3 bg-background border border-outline-variant rounded-lg text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-3 focus:ring-primary/20 transition-all placeholder:text-outline/70" id="password" name="password" placeholder="••••••••" type="password"/>
+<button class="absolute inset-y-0 right-0 pr-3 flex items-center text-outline hover:text-primary transition-colors focus:outline-none" type="button">
+<span class="material-symbols-outlined" data-icon="visibility_off">visibility_off</span>
+</button>
+</div>
+</div>
+<!-- Remember Me -->
+<div class="flex items-center">
+<input class="h-4 w-4 rounded border-outline-variant text-primary focus:ring-primary/20 bg-background cursor-pointer" id="remember-me" name="remember-me" type="checkbox"/>
+<label class="ml-2 block text-body-sm font-body-sm text-on-surface-variant cursor-pointer" for="remember-me">
+                    Remember me for 30 days
+                </label>
+</div>
+<!-- Submit Button -->
+<button class="w-full bg-primary hover:bg-primary-container text-on-primary text-label-lg font-label-lg py-3 px-4 rounded-lg shadow-md transition-all active:scale-[0.98] flex items-center justify-center gap-2 mt-4" type="submit">
+                Login
+                <span class="material-symbols-outlined text-[20px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</form>
+<!-- Sign Up Link -->
+<div class="mt-8 pt-6 border-t border-outline-variant/30 w-full text-center">
+<p class="text-body-sm font-body-sm text-on-surface-variant">
+                Don't have an account? 
+                <a class="text-primary font-semibold hover:text-primary-container transition-colors" href="#">Sign up</a>
+</p>
+</div>
+</main>
+</body></html>
