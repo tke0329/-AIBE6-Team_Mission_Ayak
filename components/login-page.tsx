@@ -5,6 +5,10 @@ import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { createClient } from "@/lib/supabase/client";
+import {
+  HomeIcon,
+  PageLinkActionButton,
+} from "@/components/page-action-button";
 
 type LoginPageProps = {
   nextPath?: string;
@@ -30,7 +34,9 @@ export function LoginPage({ nextPath = "/", joined = false }: LoginPageProps) {
     });
 
     if (signInError) {
-      setError("로그인에 실패했습니다. 이메일과 비밀번호를 다시 확인해 주세요.");
+      setError(
+        "로그인에 실패했습니다. 이메일과 비밀번호를 다시 확인해 주세요.",
+      );
       setPending(false);
       return;
     }
@@ -44,14 +50,14 @@ export function LoginPage({ nextPath = "/", joined = false }: LoginPageProps) {
       <section className="w-full max-w-md rounded-[32px] border border-white/60 bg-white/94 p-8 shadow-[0_30px_80px_rgba(0,80,203,0.14)]">
         <div className="mb-8 text-center">
           <div className="flex justify-start">
-            <Link href="/" className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-[var(--color-primary)] shadow-[0_10px_25px_rgba(0,80,203,0.08)] transition hover:bg-[var(--color-surface-container-low)]">
-              홈으로
-            </Link>
+            <PageLinkActionButton href="/" icon={<HomeIcon />} label="홈으로" />
           </div>
           <div className="mx-auto flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-full bg-[var(--color-primary)] text-lg font-bold text-white shadow-[0_16px_40px_rgba(0,80,203,0.28)] md:h-20 md:w-20">
             AY
           </div>
-          <h1 className="font-display mt-5 text-3xl font-bold text-[var(--color-primary)]">AYAK 로그인</h1>
+          <h1 className="font-display mt-5 text-3xl font-bold text-[var(--color-primary)]">
+            AYAK 로그인
+          </h1>
           <p className="mt-2 text-sm leading-6 text-[var(--color-on-surface-variant)]">
             회원가입한 이메일과 비밀번호로 로그인합니다.
           </p>
@@ -64,7 +70,10 @@ export function LoginPage({ nextPath = "/", joined = false }: LoginPageProps) {
             </div>
           ) : null}
           <div>
-            <label htmlFor="email" className="mb-2 block text-sm font-semibold text-[var(--color-on-surface)]">
+            <label
+              htmlFor="email"
+              className="mb-2 block text-sm font-semibold text-[var(--color-on-surface)]"
+            >
               이메일
             </label>
             <input
@@ -77,7 +86,10 @@ export function LoginPage({ nextPath = "/", joined = false }: LoginPageProps) {
             />
           </div>
           <div>
-            <label htmlFor="password" className="mb-2 block text-sm font-semibold text-[var(--color-on-surface)]">
+            <label
+              htmlFor="password"
+              className="mb-2 block text-sm font-semibold text-[var(--color-on-surface)]"
+            >
               비밀번호
             </label>
             <input
@@ -105,7 +117,10 @@ export function LoginPage({ nextPath = "/", joined = false }: LoginPageProps) {
 
         <div className="mt-6 border-t border-[var(--color-outline-variant)]/40 pt-6 text-center text-sm text-[var(--color-on-surface-variant)]">
           계정이 없다면{" "}
-          <Link href="/member/join" className="font-semibold text-[var(--color-primary)]">
+          <Link
+            href="/member/join"
+            className="font-semibold text-[var(--color-primary)]"
+          >
             회원가입
           </Link>
         </div>

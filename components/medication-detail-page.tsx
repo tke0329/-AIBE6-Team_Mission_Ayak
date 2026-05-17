@@ -7,10 +7,7 @@ import { MouseEvent, useState } from "react";
 import { AppShell } from "@/components/app-shell";
 import {
   BackIcon,
-  HomeIcon,
-  ListIcon,
   PageButtonActionButton,
-  PageLinkActionButton,
 } from "@/components/page-action-button";
 import { Medication } from "@/components/types";
 import { useAuthUser } from "@/lib/auth";

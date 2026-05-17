@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 import { createClient } from "@/lib/supabase/client";
 import { getKoreanSignUpErrorMessage } from "@/lib/supabase/auth-error";
+import { HomeIcon, PageLinkActionButton } from "@/components/page-action-button";
 
 export function JoinPage() {
   const router = useRouter();
@@ -53,9 +54,7 @@ export function JoinPage() {
       <section className="w-full max-w-md rounded-[32px] border border-white/60 bg-white/94 p-8 shadow-[0_30px_80px_rgba(0,80,203,0.14)]">
         <div className="mb-8 text-center">
           <div className="flex justify-start">
-            <Link href="/" className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-[var(--color-primary)] shadow-[0_10px_25px_rgba(0,80,203,0.08)] transition hover:bg-[var(--color-surface-container-low)]">
-              홈으로
-            </Link>
+            <PageLinkActionButton href="/" icon={<HomeIcon />} label="홈으로" />
           </div>
           <h1 className="font-display text-3xl font-bold text-[var(--color-primary)]">AYAK 회원가입</h1>
         </div>
