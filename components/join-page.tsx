@@ -116,7 +116,7 @@ export function JoinPage() {
             />
           </div>
           {error ? (
-            <div className="rounded-2xl bg-[var(--color-error-container)] px-4 py-3 text-sm text-[var(--color-on-error-container)]">
+            <div className="text-sm font-medium text-[#b3261e]">
               {error}
             </div>
           ) : null}

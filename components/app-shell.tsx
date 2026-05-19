@@ -15,7 +15,11 @@ const navigation = [
   { href: "/member", label: "마이페이지" },
 ];
 
-export function AppShell({ children }: PropsWithChildren) {
+type AppShellProps = PropsWithChildren<{
+  mainClassName?: string;
+}>;
+
+export function AppShell({ children, mainClassName }: AppShellProps) {
   const pathname = usePathname();
   const router = useRouter();
   const user = useAuthUser();
@@ -94,7 +98,11 @@ export function AppShell({ children }: PropsWithChildren) {
           </div>
         </div>
       </header>
-      <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 py-8 md:px-8 md:py-10">
+      <main
+        className={`mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 py-8 md:px-8 md:py-10 ${
+          mainClassName ?? ""
+        }`}
+      >
         {children}
       </main>
       <footer className="border-t border-[var(--color-outline-variant)]/60 bg-white/85">

@@ -18,6 +18,11 @@ const displayFont = Manrope({
 export const metadata: Metadata = {
   title: "AYAK",
   description: "복잡한 의약품 정보를 쉽고 빠르게 확인할 수 있는 생활형 의약품 안내 서비스",
+  icons: {
+    icon: "/icon.png",
+    apple: "/icon.png",
+    shortcut: "/icon.png",
+  },
 };
 
 export default function RootLayout({

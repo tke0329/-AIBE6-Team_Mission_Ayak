@@ -263,7 +263,7 @@ export function SearchPage({
                           href="/member/login"
                           className="inline-flex w-full items-center justify-center rounded-2xl bg-[var(--color-primary)] px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(0,80,203,0.24)] transition hover:bg-[var(--color-primary-container)]"
                         >
-                          로그인 후 등록
+                          로그인 후 내 복용약 등록하기
                         </Link>
                       )}
                       <Link
