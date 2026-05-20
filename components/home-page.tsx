@@ -47,7 +47,7 @@ export function HomePage({ medications }: HomePageProps) {
               <div className="inline-flex rounded-full bg-[var(--color-primary-fixed)] px-3 py-1 text-[11px] font-semibold text-[var(--color-primary)]">
                 생활형 의약품 안내 서비스
               </div>
-              <h1 className="font-display mt-4 max-w-2xl text-[2rem] font-bold leading-[1.14] tracking-[-0.02em] text-[var(--color-on-surface)] md:text-[2.35rem]">
+              <h1 className="font-display mt-4 max-w-2xl text-[2rem] font-bold leading-[1.24] tracking-[-0.02em] text-[var(--color-on-surface)] md:text-[2.35rem]">
                 약의 효과와
                 <br />
                 복용 정보를
@@ -56,9 +56,9 @@ export function HomePage({ medications }: HomePageProps) {
                 <br />
                 확인하세요
               </h1>
-              <p className="mt-3 max-w-xl text-sm leading-6 text-[var(--color-on-surface-variant)] md:text-[15px]">
+              <p className="mt-3 max-w-xl text-sm leading-7 text-[var(--color-on-surface-variant)] md:text-[15px]">
                 AYAK은 의약품의 효과, 효능, 복용 시 참고할 정보를 카드 형태로
-                정리하고 내 복용약까지 이어서 관리할 수 있게 구성한
+                정리하고 내 복용약까지 <br /> 이어서 관리할 수 있게 구성한
                 서비스입니다.
               </p>
 
@@ -110,6 +110,15 @@ export function HomePage({ medications }: HomePageProps) {
                   <p className="mt-1 text-sm leading-5 text-[var(--color-on-surface-variant)]">
                     의약품 복용 시 발생할 수 있는 <br />
                     부작용과 주의사항을 미리확인해보세요.
+                  </p>
+                </div>
+                <div>
+                  <div className="text-sm font-semibold text-[var(--color-on-surface)]">
+                    4. 건강정보 입력
+                  </div>
+                  <p className="mt-1 text-sm leading-5 text-[var(--color-on-surface-variant)]">
+                    마이페이지에서 건강정보를 입력하고 자신에게 맞는 주의사항을
+                    확인해보세요
                   </p>
                 </div>
               </div>

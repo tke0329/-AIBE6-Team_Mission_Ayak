@@ -11,11 +11,14 @@ import {
 } from "@/components/page-action-button";
 import { Medication } from "@/components/types";
 import { useAuthUser } from "@/lib/auth";
+import { hasHealthProfile } from "@/lib/health-profile";
+import { extractMedicationGuidance } from "@/lib/medication-guidance";
 import { splitMedicationName } from "@/lib/medication-name";
 import {
   extractSideEffectKeywords,
   getGenericSideEffectNotice,
 } from "@/lib/side-effects";
+import { useHealthProfile } from "@/lib/use-health-profile";
 import { useUserMedications } from "@/lib/user-medications";
 
 type MedicationDetailPageProps = {
@@ -29,11 +32,14 @@ export function MedicationDetailPage({
   const displayName = splitMedicationName(medication.name);
   const user = useAuthUser();
   const [pending, setPending] = useState(false);
+  const { profile } = useHealthProfile(user?.id);
   const { medicationIds, addMedication, removeMedication, loading, error } =
     useUserMedications(user?.id);
   const saved = medicationIds.includes(medication.id);
   const loggedIn = Boolean(user);
   const authPending = user === undefined;
+  const hasProfile = hasHealthProfile(profile);
+  const showProfileGuidance = loggedIn && hasProfile;
   const sectionLinks = [
     { href: "#overview", label: "핵심 정보" },
     { href: "#efficacy", label: "효능" },
@@ -41,6 +47,12 @@ export function MedicationDetailPage({
     { href: "#cautions", label: "주의사항" },
     { href: "#side-effects", label: "부작용" },
   ];
+  if (showProfileGuidance) {
+    sectionLinks.splice(1, 0, {
+      href: "#profile-guidance",
+      label: "사용자 맞춤 주의사항",
+    });
+  }
   const usageItems =
     medication.usage.length > 0
       ? medication.usage
@@ -54,6 +66,10 @@ export function MedicationDetailPage({
       ? medication.sideEffects
       : ["부작용 정보가 제공되지 않았습니다."];
   const sideEffectKeywords = extractSideEffectKeywords(sideEffectItems);
+  const personalizedGuidance = extractMedicationGuidance([medication], profile);
+  const highlightedGuidance = personalizedGuidance.filter(
+    (guide) => guide.profileMatches.length > 0,
+  );
 
   async function handleMedicationToggle(event: MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
@@ -172,6 +188,55 @@ export function MedicationDetailPage({
               </div>
             </article>
           </div>
+          {showProfileGuidance ? (
+            <div
+              id="profile-guidance"
+              className="mt-5 rounded-[24px] border border-[var(--color-outline-variant)]/40 bg-[var(--color-surface-container-low)] p-5"
+            >
+              <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
+                <div>
+                  <h2 className="text-lg font-bold text-[var(--color-on-surface)]">
+                    이 약에서 먼저 볼 사용자 맞춤 주의
+                  </h2>
+                  <p className="mt-1 text-sm leading-6 text-[var(--color-on-surface-variant)]">
+                    입력한 건강정보와 관련이 있는 주의사항 항목을 먼저
+                    보여줍니다.
+                  </p>
+                </div>
+                <div className="rounded-full bg-white px-3 py-2 text-xs font-semibold text-[var(--color-primary)]">
+                  맞춤 안내 {highlightedGuidance.length}개
+                </div>
+              </div>
+
+              {highlightedGuidance.length > 0 ? (
+                <div className="mt-4 grid gap-3 lg:grid-cols-2">
+                  {highlightedGuidance.map((guide) => (
+                    <article
+                      key={guide.key}
+                      className="rounded-2xl bg-white p-4"
+                    >
+                      <div className="flex flex-wrap gap-2">
+                        <div className="rounded-full bg-[var(--color-primary-fixed)] px-3 py-2 text-sm font-semibold text-[var(--color-primary)]">
+                          {guide.title}
+                        </div>
+                        <div className="rounded-full bg-[var(--color-surface-container-low)] px-3 py-2 text-xs font-semibold text-[var(--color-on-surface-variant)]">
+                          {guide.profileMatches.join(", ")}
+                        </div>
+                      </div>
+                      <p className="mt-3 text-sm leading-6 text-[var(--color-on-surface)]">
+                        {guide.message}
+                      </p>
+                    </article>
+                  ))}
+                </div>
+              ) : (
+                <div className="mt-4 rounded-2xl bg-white px-4 py-3 text-sm leading-6 text-[var(--color-on-surface-variant)]">
+                  현재 입력한 건강정보와 직접 맞닿아 우선 표시할 맞춤 주의는
+                  없습니다. 아래 사용 방법과 주의사항을 함께 확인해 주세요.
+                </div>
+              )}
+            </div>
+          ) : null}
           <div className="mt-5 flex flex-wrap gap-2">
             {sectionLinks.map((item) => (
               <a

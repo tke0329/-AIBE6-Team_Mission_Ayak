@@ -35,9 +35,7 @@ export function LoginPage({ nextPath = "/", joined = false }: LoginPageProps) {
     });
 
     if (signInError) {
-      setError(
-        "로그인에 실패했습니다. 이메일과 비밀번호를 다시 확인해 주세요.",
-      );
+      setError("E-Mail 또는 비밀번호를 확인해 주세요.");
       setPending(false);
       return;
     }
@@ -103,7 +101,7 @@ export function LoginPage({ nextPath = "/", joined = false }: LoginPageProps) {
             />
           </div>
           {error ? (
-            <div className="rounded-2xl bg-[var(--color-error-container)] px-4 py-3 text-sm text-[var(--color-on-error-container)]">
+            <div className="text-sm px-2 font-medium text-[#b3261e]">
               {error}
             </div>
           ) : null}

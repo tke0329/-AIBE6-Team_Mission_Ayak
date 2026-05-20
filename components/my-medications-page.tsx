@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 import { AppShell } from "@/components/app-shell";
 import { useAuthUser } from "@/lib/auth";
+import { hasHealthProfile } from "@/lib/health-profile";
 import { extractMedicationGuidance } from "@/lib/medication-guidance";
 import { splitMedicationName } from "@/lib/medication-name";
 import {
@@ -13,6 +14,7 @@ import {
   getGenericSideEffectNotice,
   getSideEffectGuidance,
 } from "@/lib/side-effects";
+import { useHealthProfile } from "@/lib/use-health-profile";
 import { useUserMedications } from "@/lib/user-medications";
 import { useSavedMedications } from "@/lib/use-saved-medications";
 
@@ -21,6 +23,7 @@ export function MyMedicationsPage() {
   const user = useAuthUser();
   const { medicationIds, removeMedication, clearMedications, loading, error } =
     useUserMedications(user?.id);
+  const { profile } = useHealthProfile(user?.id);
   const {
     medications: items,
     loading: medicationsLoading,
@@ -79,9 +82,10 @@ export function MyMedicationsPage() {
       return a.keyword.localeCompare(b.keyword, "ko");
     });
   }, [items]);
+  const hasProfile = hasHealthProfile(profile);
   const integratedGuidance = useMemo(
-    () => extractMedicationGuidance(items),
-    [items],
+    () => extractMedicationGuidance(items, profile),
+    [items, profile],
   );
 
   if (user === undefined) {
@@ -167,6 +171,12 @@ export function MyMedicationsPage() {
                     등록한 약 전체를 기준으로 식전·식후 복용, 운전 주의, 병용
                     주의 같은 생활형 안내를 한 번에 모아봅니다.
                   </p>
+                  {hasProfile ? (
+                    <p className="mt-2 text-xs leading-5 text-[var(--color-primary)]">
+                      입력한 건강정보와 맞닿은 주의 항목은 먼저 확인할 수 있도록
+                      상단으로 올려 보여줍니다.
+                    </p>
+                  ) : null}
                 </div>
                 <div className="rounded-full bg-[var(--color-primary-fixed)] px-4 py-2 text-xs font-semibold text-[var(--color-primary)]">
                   총 {integratedGuidance.length}개 안내
@@ -180,8 +190,15 @@ export function MyMedicationsPage() {
                     className="rounded-[24px] border border-[var(--color-outline-variant)]/40 bg-[var(--color-surface-container-low)] p-5"
                   >
                     <div className="flex items-start justify-between gap-3">
-                      <div className="rounded-full bg-white px-3 py-2 text-sm font-semibold text-[var(--color-primary)]">
-                        {guide.title}
+                      <div className="flex flex-wrap gap-2">
+                        <div className="rounded-full bg-white px-3 py-2 text-sm font-semibold text-[var(--color-primary)]">
+                          {guide.title}
+                        </div>
+                        {guide.profileMatches.length > 0 ? (
+                          <div className="rounded-full bg-[var(--color-primary-fixed)] px-3 py-2 text-xs font-semibold text-[var(--color-primary)]">
+                            건강정보 우선
+                          </div>
+                        ) : null}
                       </div>
                       <div className="text-xs font-semibold text-[var(--color-on-surface-variant)]">
                         관련 약 {guide.medicationNames.length}개
@@ -190,6 +207,11 @@ export function MyMedicationsPage() {
                     <p className="mt-4 text-sm leading-6 text-[var(--color-on-surface)]">
                       {guide.message}
                     </p>
+                    {guide.profileMatches.length > 0 ? (
+                      <p className="mt-3 text-xs leading-5 text-[var(--color-on-surface-variant)]">
+                        우선 반영된 건강정보: {guide.profileMatches.join(", ")}
+                      </p>
+                    ) : null}
                     <div className="mt-4 flex flex-wrap gap-2">
                       {guide.medicationNames.map((name) => (
                         <span
@@ -329,7 +351,7 @@ export function MyMedicationsPage() {
                   </div>
                 ) : null}
               </div>
-              <div className="mt-5 rounded-2xl bg-[var(--color-error-container)] px-4 py-3 text-sm leading-6 text-[var(--color-on-error-container)]">
+              <div className="text-sm px-3 py-3 font-semibold font-medium text-[#b3261e]">
                 공통 주의사항: {getGenericSideEffectNotice()}
               </div>
             </section>
