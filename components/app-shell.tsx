@@ -25,13 +25,18 @@ export function AppShell({ children, mainClassName }: AppShellProps) {
   const user = useAuthUser();
 
   const isAuthPage = pathname.startsWith("/member/login") || pathname.startsWith("/member/join");
+  const isHomePage = pathname === "/";
 
   if (isAuthPage) {
     return <>{children}</>;
   }
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top,#dce9ff_0%,#f8f9ff_32%,#f8f9ff_100%)] text-[var(--color-on-background)]">
+    <div
+      className={`flex flex-col bg-[radial-gradient(circle_at_top,#dce9ff_0%,#f8f9ff_32%,#f8f9ff_100%)] text-[var(--color-on-background)] ${
+        isHomePage ? "h-dvh overflow-hidden" : "min-h-screen"
+      }`}
+    >
       <header className="sticky top-0 z-40 border-b border-[var(--color-outline-variant)]/60 bg-white/88 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 md:px-8">
           <Link href="/" className="flex items-center gap-3">
@@ -99,13 +104,15 @@ export function AppShell({ children, mainClassName }: AppShellProps) {
         </div>
       </header>
       <main
-        className={`mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 py-8 md:px-8 md:py-10 ${
+        className={`mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 ${
+          isHomePage ? "overflow-hidden py-5 md:py-6" : "py-8 md:py-10"
+        } md:px-8 ${
           mainClassName ?? ""
         }`}
       >
         {children}
       </main>
-      <footer className="border-t border-[var(--color-outline-variant)]/60 bg-white/85">
+      <footer className="shrink-0 border-t border-[var(--color-outline-variant)]/60 bg-white">
         <div className="mx-auto max-w-6xl px-4 py-6 text-sm text-[var(--color-on-surface-variant)] md:px-8">
           제공되는 의약품 정보는 공공데이터 기반 참고용이며 의료 전문가의 진단을 대체하지 않습니다.
         </div>

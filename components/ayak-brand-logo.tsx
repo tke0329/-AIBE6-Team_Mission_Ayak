@@ -8,7 +8,7 @@ type AyakBrandLogoProps = {
 export function AyakBrandLogo({ size = 44, className }: AyakBrandLogoProps) {
   return (
     <Image
-      src="/ayak-icon.png"
+      src="/icon.svg"
       alt="AYAK 아이콘"
       width={size}
       height={size}
