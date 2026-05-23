@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { AppShell } from "@/components/app-shell";
@@ -18,9 +18,13 @@ import { useHealthProfile } from "@/lib/use-health-profile";
 import { useUserMedications } from "@/lib/user-medications";
 import { useSavedMedications } from "@/lib/use-saved-medications";
 
+const INITIAL_VISIBLE_COUNT = 4;
+
 export function MyMedicationsPage() {
   const router = useRouter();
   const user = useAuthUser();
+  const [showAllGuidance, setShowAllGuidance] = useState(false);
+  const [showAllSideEffects, setShowAllSideEffects] = useState(false);
   const { medicationIds, removeMedication, clearMedications, loading, error } =
     useUserMedications(user?.id);
   const { profile } = useHealthProfile(user?.id);
@@ -87,6 +91,14 @@ export function MyMedicationsPage() {
     () => extractMedicationGuidance(items, profile),
     [items, profile],
   );
+  const visibleGuidance = showAllGuidance
+    ? integratedGuidance
+    : integratedGuidance.slice(0, INITIAL_VISIBLE_COUNT);
+  const visibleSideEffectGroups = showAllSideEffects
+    ? sideEffectGroups
+    : sideEffectGroups.slice(0, INITIAL_VISIBLE_COUNT);
+  const hasMoreGuidance = integratedGuidance.length > INITIAL_VISIBLE_COUNT;
+  const hasMoreSideEffects = sideEffectGroups.length > INITIAL_VISIBLE_COUNT;
 
   if (user === undefined) {
     return (
@@ -184,7 +196,7 @@ export function MyMedicationsPage() {
               </div>
 
               <div className="mt-5 grid gap-4 lg:grid-cols-2">
-                {integratedGuidance.map((guide) => (
+                {visibleGuidance.map((guide) => (
                   <article
                     key={guide.key}
                     className="rounded-[24px] border border-[var(--color-outline-variant)]/40 bg-[var(--color-surface-container-low)] p-5"
@@ -231,6 +243,19 @@ export function MyMedicationsPage() {
                   </div>
                 ) : null}
               </div>
+              {hasMoreGuidance ? (
+                <div className="mt-5 flex justify-center">
+                  <button
+                    type="button"
+                    onClick={() => setShowAllGuidance((current) => !current)}
+                    className="inline-flex items-center justify-center rounded-full border border-[var(--color-outline-variant)] bg-white px-12 py-3 text-sm font-semibold text-[var(--color-primary)] transition hover:bg-[var(--color-surface-container-low)]"
+                  >
+                    {showAllGuidance
+                      ? "통합 복용 주의 접기"
+                      : `${integratedGuidance.length - INITIAL_VISIBLE_COUNT}개 더보기`}
+                  </button>
+                </div>
+              ) : null}
             </section>
 
             <div className="grid gap-5">
@@ -317,7 +342,7 @@ export function MyMedicationsPage() {
               </div>
 
               <div className="mt-5 grid gap-4 lg:grid-cols-2">
-                {sideEffectGroups.map((group) => (
+                {visibleSideEffectGroups.map((group) => (
                   <article
                     key={group.keyword}
                     className="rounded-[24px] border border-[var(--color-outline-variant)]/40 bg-[var(--color-surface-container-low)] p-5"
@@ -351,8 +376,21 @@ export function MyMedicationsPage() {
                   </div>
                 ) : null}
               </div>
+              {hasMoreSideEffects ? (
+                <div className="mt-5 flex justify-center">
+                  <button
+                    type="button"
+                    onClick={() => setShowAllSideEffects((current) => !current)}
+                    className="inline-flex items-center justify-center rounded-full border border-[var(--color-outline-variant)] bg-white px-12 py-3 text-sm font-semibold text-[var(--color-primary)] transition hover:bg-[var(--color-surface-container-low)]"
+                  >
+                    {showAllSideEffects
+                      ? "부작용 모아보기 접기"
+                      : `${sideEffectGroups.length - INITIAL_VISIBLE_COUNT}개 더보기`}
+                  </button>
+                </div>
+              ) : null}
               <div className="text-sm px-3 py-3 font-semibold font-medium text-[#b3261e]">
-                공통 주의사항: {getGenericSideEffectNotice()}
+                {getGenericSideEffectNotice()}
               </div>
             </section>
           </div>
